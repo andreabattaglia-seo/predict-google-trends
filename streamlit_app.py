@@ -130,7 +130,7 @@ def main():
             #full_df
 
             a = alt.Chart(full_df).mark_area(opacity=0.6).encode(x='date', y=f'{user_input}_x')
-            b = alt.Chart(full_df).mark_area(opacity=1).encode(x='date', y=f'{user_input}_y')
+            b = alt.Chart(full_df).mark_area(opacity=0.8).encode(x='date', y=f'{user_input}_y')
             c = alt.layer(a, b).properties(title="Forecast and Trend test")
             st.text('-----PREDICTION TEST-----')
             st.altair_chart(c, use_container_width=True)

@@ -120,7 +120,7 @@ def main():
             #df_prophet
             print(df_prophet.info())
 
-            chart_prophet = alt.Chart(df_prophet).mark_line(opacity=0.3, color='red').encode(
+            chart_prophet = alt.Chart(df_prophet).mark_line(opacity=0.3).encode(
                 x=alt.X('date'),
                 y=alt.Y(f'{user_input}')
             ).properties(title="Trend Forecast")
@@ -129,8 +129,8 @@ def main():
             full_df = pd.merge(df_prophet, data_graph, left_on='date', right_on='date', how='left')#.drop('id1', axis=1)
             #full_df
 
-            a = alt.Chart(full_df).mark_area(opacity=0.6).encode(x='date', y=f'{user_input}_x')
-            b = alt.Chart(full_df).mark_area(opacity=0.8).encode(x='date', y=f'{user_input}_y')
+            a = alt.Chart(full_df).mark_area(opacity=0.5, color='blue').encode(x='date', y=f'{user_input}_x')
+            b = alt.Chart(full_df).mark_area(opacity=1, color='orange').encode(x='date', y=f'{user_input}_y')
             c = alt.layer(a, b).properties(title="Forecast and Trend test")
             st.text('-----PREDICTION TEST-----')
             st.altair_chart(c, use_container_width=True)

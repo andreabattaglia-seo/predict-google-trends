@@ -42,6 +42,9 @@ def main():
             data = data.drop('isPartial', 1)
             data_t = data.T
 
+            related_queries_dict = pytrend.related_queries()
+            related_queries_dict
+
             #data_t
             #st.text('data')
             #data

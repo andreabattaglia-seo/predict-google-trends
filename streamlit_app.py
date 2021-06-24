@@ -8,6 +8,20 @@ import socket, math, datetime
 from prophet import Prophet
 from requests import get
 
+def _max_width_():
+    max_width_str = f"max-width: 1500px;"
+    st.markdown(
+        f"""
+    <style>
+    .reportview-container .main .block-container{{
+        {max_width_str}
+    }}
+    </style>    
+    """,
+        unsafe_allow_html=True,
+    )
+_max_width_()
+
 
 st.title('Predict Google Trends')
 st.text('Get Google Trends data for keywords')

@@ -43,7 +43,7 @@ def main():
             data_t = data.T
 
             related_queries_dict = pytrend.related_queries()
-            print(related_queries_dict)
+            related_queries_dict
 
             #data_t
             #st.text('data')

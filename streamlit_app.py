@@ -42,20 +42,6 @@ def main():
             data = data.drop('isPartial', 1)
             data_t = data.T
 
-
-            related_queries_dict = pytrend.related_queries()
-            # for rising related queries
-            related_queries_rising = related_queries_dict.get(f'{user_input}').get('rising')
-            # for top related queries
-            related_queries_top = related_queries_dict.get(f'{user_input}').get('top')
-
-            col1, col2 = st.beta_columns(2)
-            col1.header('Rising Related Keywords')
-            col1.write(related_queries_rising, use_column_width=True)
-            col2.header('Top Related Keywords')
-            col2.write(related_queries_top, use_column_width=True)
-
-
             #st.text('data_graph')
             data_graph = data.copy()
             data_graph.reset_index(inplace=True)
@@ -67,6 +53,18 @@ def main():
                 y=alt.Y(f'{user_input}')
             ).properties(title="Google Trends")
             st.altair_chart(chart_trend, use_container_width=True)
+
+
+            related_queries_dict = pytrend.related_queries()
+            # for rising related queries
+            related_queries_rising = related_queries_dict.get(f'{user_input}').get('rising')
+            # for top related queries
+            related_queries_top = related_queries_dict.get(f'{user_input}').get('top')
+            col1, col2 = st.beta_columns(2)
+            col1.header('Rising Related Keywords')
+            col1.write(related_queries_rising, use_column_width=True)
+            col2.header('Top Related Keywords')
+            col2.write(related_queries_top, use_column_width=True)
 
 
             data_predict = data.copy()

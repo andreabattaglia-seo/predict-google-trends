@@ -56,9 +56,9 @@ def main():
 
             col1, col2 = st.beta_columns(2)
             col1.header('Rising Related Keywords')
-            col1(related_queries_rising, use_column_width=True)
+            col1.write(related_queries_rising, use_column_width=True)
             col2.header('Top Related Keywords')
-            col2(related_queries_top, use_column_width=True)
+            col2.write(related_queries_top, use_column_width=True)
 
 
             #related_queries_dict = pytrend.related_queries()

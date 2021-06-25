@@ -43,6 +43,7 @@ def main():
             data_t = data.T
 
 
+
             related_queries_dict = pytrend.related_queries()
             # for rising related queries
             related_queries_rising = related_queries_dict.get(f'{user_input}').get('rising')
@@ -52,6 +53,12 @@ def main():
             related_queries_rising
             st.text('Top Related Keywords')
             related_queries_top
+
+            col1, col2 = st.beta_columns(2)
+            col1.header('Rising Related Keywords')
+            col1(related_queries_rising, use_column_width=True)
+            col2.header('Top Related Keywords')
+            col2(related_queries_top, use_column_width=True)
 
 
             #related_queries_dict = pytrend.related_queries()

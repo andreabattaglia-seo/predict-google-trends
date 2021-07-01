@@ -18,7 +18,7 @@ def _max_width_():
     }}
     </style>    
     """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True, 
     )
 _max_width_()
 
@@ -26,7 +26,7 @@ hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
-            viewerBadge_container__1QSob {display: none !important;}
+            .viewerBadge_container__1QSob {display: none !important;}
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)

@@ -23,13 +23,13 @@ def _max_width_():
 _max_width_()
 
 
-st.title('Predict Google Trends')
-st.text('Get Google Trends data for keywords')
+#st.title('Predict Google Trends')
+#st.text('Get Google Trends data for keywords')
 
 
 period = 16
-ip = get('https://api.ipify.org').text
-ip
+#ip = get('https://api.ipify.org').text
+#ip
 
 def main():
     user_input = st.text_input('enter the keyword and press "Make request"')

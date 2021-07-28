@@ -128,8 +128,8 @@ def main():
             full_df = pd.merge(df_prophet, data_graph, left_on='date', right_on='date', how='left')#.drop('id1', axis=1)
             #full_df
 
-            a = alt.Chart(full_df).mark_area(opacity=0.5, color='blue').encode(x='date', y=f'{user_input}_x')
-            b = alt.Chart(full_df).mark_area(opacity=0.5, color='orange').encode(x='date', y=f'{user_input}_y')
+            a = alt.Chart(full_df).mark_area(opacity=0.5, color='#25f4ee').encode(x='date', y=f'{user_input}_x')
+            b = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y=f'{user_input}_y')
             c = alt.layer(a, b).properties(title="Forecast and Trend Comparison")
             st.altair_chart(c, use_container_width=True)
 

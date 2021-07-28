@@ -65,7 +65,6 @@ def main():
             data = pytrend.interest_over_time()
 
             data = data.drop('isPartial', 1)
-            data_t = data.T
 
             #st.text('data_graph')
             data_graph = data.copy()

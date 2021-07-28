@@ -16,10 +16,10 @@ def _max_width_():
     .reportview-container .main .block-container{{
         {max_width_str}
     }}
-    </style>    
+    </style>
     """,
         unsafe_allow_html=True, 
-    )
+    ) 
 _max_width_()
 
 hide_streamlit_style = """
@@ -32,20 +32,20 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 # This code is different for each deployed app.
-CURRENT_THEME = "blue"
-IS_DARK_THEME = True
-EXPANDER_TEXT = """
-    This is a custom theme. You can enable it by copying the following code
-    to `.streamlit/config.toml`:
-    ```python
-    [theme]
-    primaryColor = "#E694FF"
-    backgroundColor = "#00172B"
-    secondaryBackgroundColor = "#0083B8"
-    textColor = "#C6CDD4"
-    font = "sans-serif"
-    ```
-    """
+#CURRENT_THEME = "blue"
+#IS_DARK_THEME = True
+# EXPANDER_TEXT = """
+#     This is a custom theme. You can enable it by copying the following code
+#     to `.streamlit/config.toml`:
+#     ```python
+#     [theme]
+#     primaryColor = "#E694FF"
+#     backgroundColor = "#00172B"
+#     secondaryBackgroundColor = "#0083B8"
+#     textColor = "#C6CDD4"
+#     font = "sans-serif"
+#     ```
+#     """
 
 
 #st.title('Predict Google Trends')
@@ -61,16 +61,13 @@ def main():
     if st.button('Make request'):
         with st.spinner("Training ongoing"):
             pytrend = TrendReq(hl='it-IT', tz=360)
-            st.write(pytrend.build_payload([f'{user_input}'], cat=0, timeframe='today 5-y', geo='IT', gprop=''))
+            pytrend.build_payload([f'{user_input}'], cat=0, timeframe='today 5-y', geo='IT', gprop='')
             data = pytrend.interest_over_time()
 
             data = data.drop('isPartial', 1)
-
             #st.text('data_graph')
             data_graph = data.copy()
-            st.write('1111111111111')
             data_graph.reset_index(inplace=True)
-            st.write('2222222222222222')
             #data_graph
             #print(data_graph.info())
             #st.line_chart(data_graph)
@@ -87,9 +84,9 @@ def main():
             # for top related queries
             related_queries_top = related_queries_dict.get(f'{user_input}').get('top')
             col1, col2 = st.beta_columns(2)
-            col1.header('Rising Related Keywords')
+            col1.header('Keyword correlate in crescia')
             col1.write(related_queries_rising, use_column_width=True)
-            col2.header('Top Related Keywords')
+            col2.header('Top Keyword correlate')
             col2.write(related_queries_top, use_column_width=True)
 
 
@@ -129,9 +126,10 @@ def main():
             full_df = pd.merge(df_prophet, data_graph, left_on='date', right_on='date', how='left')#.drop('id1', axis=1)
             #full_df
 
-            a = alt.Chart(full_df).mark_area(opacity=0.5, color='#25f4ee').encode(x='date', y=f'{user_input}_x')
-            b = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y=f'{user_input}_y')
+            a = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y=f'{user_input}_x')
+            b = alt.Chart(full_df).mark_area(opacity=0.6, color='#25f4ee').encode(x='date', y=f'{user_input}_y')
             c = alt.layer(a, b).properties(title="Forecast and Trend Comparison")
+            st.write('Legenda: azzurro Google Trends, rosso Previsionale')
             st.altair_chart(c, use_container_width=True)
 
 
@@ -177,10 +175,11 @@ def main():
             full_df = pd.merge(df_prophet, data_graph, left_on='date', right_on='date', how='left')#.drop('id1', axis=1)
             #full_df
 
-            a = alt.Chart(full_df).mark_area(opacity=0.5, color='#25f4ee').encode(x='date', y=f'{user_input}_x')
-            b = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y=f'{user_input}_y')
+            a = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y=f'{user_input}_x')
+            b = alt.Chart(full_df).mark_area(opacity=0.6, color='#25f4ee').encode(x='date', y=f'{user_input}_y')
             c = alt.layer(a, b).properties(title="Forecast and Trend test")
             st.text('-----PREDICTION TEST-----')
+            st.write('Legenda: azzurro Google Trends, rosso Previsionale')
             st.altair_chart(c, use_container_width=True)
 
 

@@ -68,7 +68,9 @@ def main():
 
             #st.text('data_graph')
             data_graph = data.copy()
-            data_graph = data_graph.reset_index(inplace=True)
+            st.write('1111111111111')
+            data_graph.reset_index(inplace=True)
+            st.write('2222222222222222')
             #data_graph
             #print(data_graph.info())
             #st.line_chart(data_graph)

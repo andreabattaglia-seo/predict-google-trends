@@ -63,6 +63,7 @@ def main():
             pytrend = TrendReq(hl='it-IT', tz=360)
             pytrend.build_payload([f'{user_input}'], cat=0, timeframe='today 5-y', geo='IT', gprop='')
             data = pytrend.interest_over_time()
+            data = data[data.isPartial != "True"]
 
             data = data.drop('isPartial', 1)
             #st.text('data_graph')

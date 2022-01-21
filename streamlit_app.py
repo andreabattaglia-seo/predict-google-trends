@@ -84,7 +84,7 @@ def main():
             related_queries_rising = related_queries_dict.get(f'{user_input}').get('rising')
             # for top related queries
             related_queries_top = related_queries_dict.get(f'{user_input}').get('top')
-            col1, col2 = st.beta_columns(2)
+            col1, col2 = st.columns(2)
             col1.header('Keyword correlate in crescita')
             col1.write(related_queries_rising, use_column_width=True)
             col2.header('Top Keyword correlate')

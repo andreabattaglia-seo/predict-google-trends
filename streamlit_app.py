@@ -52,7 +52,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 #st.text('Get Google Trends data for keywords')
 
 
-period = 16
+period = 52
 #ip = get('https://api.ipify.org').text
 #ip
 

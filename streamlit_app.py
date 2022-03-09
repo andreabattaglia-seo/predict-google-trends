@@ -73,7 +73,7 @@ def main():
             #print(data_graph.info())
             #st.line_chart(data_graph)
             chart_trend = alt.Chart(data_graph).mark_line().encode(
-                x=alt.X('date'),
+                x=alt.X('date:T'),
                 y=alt.Y(f'{user_input}')
             ).properties(title="Google Trends")
             st.altair_chart(chart_trend, use_container_width=True)

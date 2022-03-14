@@ -126,19 +126,18 @@ def main():
 
             full_df = pd.merge(df_prophet, data_graph, left_on='date', right_on='date', how='left')#.drop('id1', axis=1)
             full_df
-            #full_df = full_df.rename(columns={f'{user_input}_x': 'forecast', f'{user_input}_y': 'training_data'})
-            full_df.columns.values[1] = "forecast"
-            full_df.columns.values[2] = "training_data"
+            full_df = full_df.rename(columns={full_df.columns[1]: 'forecast'})
+            full_df = full_df.rename(columns={full_df.columns[2]: 'training_data'})
             full_df
 
-            a = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y=f'{user_input}_x')
-            b = alt.Chart(full_df).mark_area(opacity=0.6, color='#25f4ee').encode(x='date', y=f'{user_input}_y')
+            a = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y='forecast')
+            b = alt.Chart(full_df).mark_area(opacity=0.6, color='#25f4ee').encode(x='date', y='training_data')
             c = alt.layer(a, b).properties(title="Forecast and Trend Comparison")
             st.write('Legenda: azzurro Google Trends, rosso Previsionale')
             st.altair_chart(c, use_container_width=True)
             
             def convert_df(full_df):
-               return full_df.to_csv(encoding='utf-8',sep=';',decimal=',',index=False).encode('utf-8')
+               return full_df.to_csv(sep=';',decimal=',',index=False).encode('utf-8')
             csv = convert_df(full_df)
             st.download_button(
                "Press to Download",
@@ -148,54 +147,54 @@ def main():
                key='download-csv'
             )
 
-            #
-            #
-            #
-            #Data test
-            data_predict = data.copy()
-            data_predict.reset_index(inplace=True)
-            #st.text('data_predict_1')
-            data_predict.drop(index=data_predict.index[-period:], axis=0, inplace=True)
-            #st.text('data_predict_2')
-            #data_predict
+            # #
+            # #
+            # #
+            # #Data test
+            # data_predict = data.copy()
+            # data_predict.reset_index(inplace=True)
+            # #st.text('data_predict_1')
+            # data_predict.drop(index=data_predict.index[-period:], axis=0, inplace=True)
+            # #st.text('data_predict_2')
+            # #data_predict
 
-            data_predict = data_predict.rename(columns={'date': 'ds'})
-            data_predict = data_predict.rename(columns={f'{user_input}': 'y'})
-            #data_predict.columns = ['ds', 'y']
-            #data_predict
+            # data_predict = data_predict.rename(columns={'date': 'ds'})
+            # data_predict = data_predict.rename(columns={f'{user_input}': 'y'})
+            # #data_predict.columns = ['ds', 'y']
+            # #data_predict
 
-            m = Prophet(weekly_seasonality=True)
-            m.fit(data_predict)
+            # m = Prophet(weekly_seasonality=True)
+            # m.fit(data_predict)
 
-            future = m.make_future_dataframe(periods=period, freq='W')
-            future.tail()
-            forecast = m.predict(future)
-            forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
-            df_prophet = forecast[['ds', 'yhat']]
+            # future = m.make_future_dataframe(periods=period, freq='W')
+            # future.tail()
+            # forecast = m.predict(future)
+            # forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
+            # df_prophet = forecast[['ds', 'yhat']]
 
 
-            #st.text('data_prophet')
-            df_prophet = df_prophet.rename(columns={'ds': 'date'})
-            df_prophet = df_prophet.rename(columns={'yhat': f'{user_input}'})
-            #st.text('data_predict_3')
-            #df_prophet
-            print(df_prophet.info())
+            # #st.text('data_prophet')
+            # df_prophet = df_prophet.rename(columns={'ds': 'date'})
+            # df_prophet = df_prophet.rename(columns={'yhat': f'{user_input}'})
+            # #st.text('data_predict_3')
+            # #df_prophet
+            # print(df_prophet.info())
 
-            chart_prophet = alt.Chart(df_prophet).mark_line(opacity=0.3).encode(
-                x=alt.X('date'),
-                y=alt.Y(f'{user_input}')
-            ).properties(title="Trend Forecast")
-            #st.altair_chart(chart_prophet, use_container_width=True)
+            # chart_prophet = alt.Chart(df_prophet).mark_line(opacity=0.3).encode(
+            #     x=alt.X('date'),
+            #     y=alt.Y(f'{user_input}')
+            # ).properties(title="Trend Forecast")
+            # #st.altair_chart(chart_prophet, use_container_width=True)
 
-            full_df = pd.merge(df_prophet, data_graph, left_on='date', right_on='date', how='left')#.drop('id1', axis=1)
-            #full_df
+            # full_df = pd.merge(df_prophet, data_graph, left_on='date', right_on='date', how='left')#.drop('id1', axis=1)
+            # #full_df
 
-            a = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y=f'{user_input}_x')
-            b = alt.Chart(full_df).mark_area(opacity=0.6, color='#25f4ee').encode(x='date', y=f'{user_input}_y')
-            c = alt.layer(a, b).properties(title="Forecast and Trend test")
-            st.text('-----PREDICTION TEST-----')
-            st.write('Legenda: azzurro Google Trends, rosso Previsionale')
-            st.altair_chart(c, use_container_width=True)
+            # a = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y='forecast')
+            # b = alt.Chart(full_df).mark_area(opacity=0.6, color='#25f4ee').encode(x='date', y='training_data')
+            # c = alt.layer(a, b).properties(title="Forecast and Trend test")
+            # st.text('-----PREDICTION TEST-----')
+            # st.write('Legenda: azzurro Google Trends, rosso Previsionale')
+            # st.altair_chart(c, use_container_width=True)
 
 
 

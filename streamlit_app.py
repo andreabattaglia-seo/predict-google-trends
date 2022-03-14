@@ -133,9 +133,9 @@ def main():
             st.write('Legenda: azzurro Google Trends, rosso Previsionale')
             st.altair_chart(c, use_container_width=True)
             
-            def convert_df(df):
-               return df.to_csv().encode('utf-8')
-            csv = convert_df(df)
+            def convert_df(full_df):
+               return full_df.to_csv().encode('utf-8')
+            csv = convert_df(full_df)
             st.download_button(
                "Press to Download",
                csv,

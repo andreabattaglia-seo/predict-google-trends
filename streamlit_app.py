@@ -125,10 +125,9 @@ def main():
             #st.altair_chart(chart_prophet, use_container_width=True)
 
             full_df = pd.merge(df_prophet, data_graph, left_on='date', right_on='date', how='left')#.drop('id1', axis=1)
-            full_df
             full_df = full_df.rename(columns={full_df.columns[1]: 'forecast'})
             full_df = full_df.rename(columns={full_df.columns[2]: 'training_data'})
-            full_df
+            #full_df
 
             a = alt.Chart(full_df).mark_area(opacity=0.5, color='#fe2c55').encode(x='date', y='forecast')
             b = alt.Chart(full_df).mark_area(opacity=0.6, color='#25f4ee').encode(x='date', y='training_data')

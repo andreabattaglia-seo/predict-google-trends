@@ -125,6 +125,7 @@ def main():
             #st.altair_chart(chart_prophet, use_container_width=True)
 
             full_df = pd.merge(df_prophet, data_graph, left_on='date', right_on='date', how='left')#.drop('id1', axis=1)
+            full_df
             full_df = full_df.rename(columns={f'{user_input}_x': 'forecast', f'{user_input}_y': 'training_data'})
             #full_df
 

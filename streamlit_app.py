@@ -132,7 +132,17 @@ def main():
             c = alt.layer(a, b).properties(title="Forecast and Trend Comparison")
             st.write('Legenda: azzurro Google Trends, rosso Previsionale')
             st.altair_chart(c, use_container_width=True)
-
+            
+            def convert_df(df):
+               return df.to_csv().encode('utf-8')
+            csv = convert_df(df)
+            st.download_button(
+               "Press to Download",
+               csv,
+               "file.csv",
+               "text/csv",
+               key='download-csv'
+            )
 
             #
             #

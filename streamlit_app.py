@@ -76,7 +76,7 @@ def main():
                 x=alt.X('date:T'),
                 y=alt.Y(f'{user_input}')
             ).properties(title="Google Trends")
-            st.altair_chart(chart_trend, use_container_width=True)
+            st.altair_chart(chart_trend + chart_trend.transform_regression('date:T', f'{user_input}'), use_container_width=True)
 
 
             related_queries_dict = pytrend.related_queries()

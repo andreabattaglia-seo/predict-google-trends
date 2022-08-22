@@ -5,7 +5,7 @@ import streamlit as st
 from pytrends import *
 from pytrends.request import TrendReq
 import socket, math, datetime
-from prophet import Prophet
+from fbprophet import Prophet
 from requests import get
 
 def _max_width_():
